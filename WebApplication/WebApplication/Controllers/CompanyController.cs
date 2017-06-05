@@ -95,14 +95,12 @@ namespace WebApplication.Controllers
                     return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.ValidationError, Message = "Validation Error" });
                 }
 
-                var employeeToCreate = new Employee()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    BirthdayDate = Convert.ToDateTime(birthdate),
-                    DepartmentId = depId
-                };
+                var employeeToCreate = UnityContainerManager.IoC.Resolve<Employee>();
+                employeeToCreate.FirstName = firstName;
+                employeeToCreate.LastName = lastName;
+                employeeToCreate.Email = email;
+                employeeToCreate.BirthdayDate = Convert.ToDateTime(birthdate);
+                employeeToCreate.DepartmentId = depId;
 
                 CompanyManager.CreateEmployee(employeeToCreate);
 
@@ -191,7 +189,11 @@ namespace WebApplication.Controllers
 
                 if (!string.IsNullOrEmpty(departmentName) && maxNumberOfEmployees > 0)
                 {
-                    var departmentToCreate = new Department() { DepartmentName = departmentName, MaxEmployees = maxNumberOfEmployees, Employees = new List<Employee>() };
+                    var departmentToCreate = UnityContainerManager.IoC.Resolve<Department>();
+                    departmentToCreate.DepartmentName = departmentName;
+                    departmentToCreate.MaxEmployees = maxNumberOfEmployees;
+                    departmentToCreate.Employees = new List<Employee>();
+
                     CompanyManager.CreateDepartment(departmentToCreate);
                     return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.OperationSuccesful, Message = "Department Created Succesfully" });
                 }

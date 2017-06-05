@@ -14,6 +14,8 @@ namespace WebApplication.IoC
         {
             //register..
             UnityContainerManager.IoC.RegisterType<ICompanyManager, CompanyManager>(new ContainerControlledLifetimeManager());
+            UnityContainerManager.IoC.RegisterType<IDepartment, Department>();
+            UnityContainerManager.IoC.RegisterType<IEmployee, Employee>(new ContainerControlledLifetimeManager());
         }
     }
 }
