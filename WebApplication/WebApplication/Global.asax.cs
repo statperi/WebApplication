@@ -18,7 +18,8 @@ namespace WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
+            //in app start ioc registry will register all classes need to be instatiated 
+            //in UnityContainerManager for later usage 
             IocRegistry.RegisterAll();
         }
     }

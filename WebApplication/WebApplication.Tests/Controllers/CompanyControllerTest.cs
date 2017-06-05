@@ -18,17 +18,21 @@ namespace WebApplication.Tests.Controllers
             var companyManager = new CompanyManager();
 
             var empl = companyManager.GetAllEmployees(false).First();
+            var dep = companyManager.GetAllDepartments(true).First(x => !x.IsFull());
+
+            if (dep == null || empl == null) return;
 
             // Arrange
             CompanyController controller = new CompanyController();
 
             // Act
+            //add new values to the first employee availabe to the first department available
             JsonResult result = 
                 controller.EmployeeEdit(empl.EmployeeId, "new name", "new last name", "newemail@newemail.com", 
-                DateTime.Now.AddYears(-25).ToString("dd-MM-yyyy"), 80) 
+                DateTime.Now.AddYears(-25).ToString("dd-MM-yyyy"), dep.DepartmentId) 
                 as JsonResult;
-            
-            //need to serailize bad shape of json data
+
+            //need to serialize JsonResult to json data and deserialize it in proper class object
             string json = JsonConvert.SerializeObject(result.Data);
             ResData res = JsonConvert.DeserializeObject<ResData>(json);
 

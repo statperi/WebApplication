@@ -8,7 +8,7 @@ namespace WebApplication.Models
 {
     public class CompanyContext : DbContext , ICompanyContext
     {
-        public CompanyContext() : base("CompanyDB")
+        public CompanyContext() : base("name=CompanyDBConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }

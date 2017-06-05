@@ -18,8 +18,10 @@ namespace WebApplication
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js","~/Scripts/respond.js", "~/Scripts/bootstrap-datepicker.js"));
 
+            //new bundle of scripts to add the custom scripts
             bundles.Add(new ScriptBundle("~/bundles/myscripts").Include("~/Scripts/departments.js", "~/Scripts/employees.js", "~/Scripts/departmentEdit.js", "~/Scripts/employeeEdit.js"));
 
+            //new bundle of styles to add the custom css
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css", "~/Content/fancybox.css", "~/Content/datepicker.css"));
         }
     }
