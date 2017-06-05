@@ -1,0 +1,199 @@
+﻿@using WebApplication.Models
+
+@{
+    var employees = ViewData["Employees"] as List<Employee>;
+    var departments = ViewData["Departments"] as List<Department>;
+    var hasDepartments = departments.Any();
+    var hasAvailableDepartments = departments.Any(x => !x.IsFull());
+}
+
+<div class="content employees-content col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
+
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+
+<span class="panel-title">Employees : </span>
+    
+    @if (employees.Any())
+    {
+        <div style="padding: 25px 0px 50% 0px; height: 200px;" class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0">
+        
+            <table class="table table-hover table-content emptable">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Birthday Date</th>
+                    <th>Department</th>
+                    <th></th>
+                </tr>
+            
+                @foreach (var emp in employees)
+                {
+                    <tr class="table-row" data-id="@emp.EmployeeId" data-url="@Url.Action("EmployeeEditView", "Company", new { id = emp.EmployeeId })">
+                        <td>@emp.EmployeeId</td>
+                        <td>@emp.FirstName</td>
+                        <td>@emp.LastName</td>
+                        <td>@emp.Email</td>
+                        <td>@(emp.BirthdayDate.ToString("dd/MM/yyyy"))</td>
+                        <td>@(emp.Department.DepartmentName)</td>
+                        <td class="delete-button-container"> 
+                            <div class="button-wrapper">
+                                <input class="x-remove" type="button" value="X" hidden="hidden" /> 
+                                <button id="mybutton" class="button-class" data-toggle="modal" data-target="#confirm-delete">X</button> 
+                            </div>
+                            <div class="error-wrapper">
+                                <span class="error-message danger" hidden="hidden"></span>
+                            </div>
+                        </td>
+                    </tr>
+                
+                }
+                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+
+            <button id="create-button" data-toggle="modal" data-target="#create-emp-modal">Create New Employee</button>
+
+        </div>
+    }
+    else
+    {
+        <div style="padding: 100px 0px 50% 0px; height: 200px;" class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0">
+            <div>
+                <span class="panel-title">@ViewBag.NoResultsMessage</span>
+            </div>
+            <div>
+                <button id="create-button" data-toggle="modal" data-target="#create-emp-modal">Create New Employee</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*The confiramtion modal*@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-edit">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*The create modal*@
+<div class="modal fade" id="create-emp-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        
+        <div class="modal-content modal-create">
+            <div class="modal-header">
+                Create a new employee
+            </div>
+            <div class="modal-body">
+                
+                @if (hasDepartments && hasAvailableDepartments)
+                {
+                    <form class="employee-edit-form form-horizontal" action="#">
+                    
+                        <div class="form-group">
+                          <label class="control-label col-sm-4" for="name">First Name:</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="firstname" placeholder="Enter first name" name="firstname">
+                            <span id="firstname-error" class="error-message hidden">The firstname was not filled correctly. Please enter a valid firstname for your employee.</span>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-4" for="name">Last Name:</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="lastname" placeholder="Enter last name" name="lastname">
+                            <span id="lastname-error" class="error-message hidden">The lastname was not filled correctly. Please enter a valid lastname for your employee.</span>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-4" for="email">Email:</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+                            <span id="email-error" class="error-message hidden">The email was not filled correctly. Please enter a valid email for your employee.</span>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="email">Birth Date:</label>
+                            <div class="col-sm-8 input-append date" id="datetimepicker-form" data-date="@(DateTime.Now.ToString("dd-MM-yyyy"))" data-date-format="dd-mm-yyyy">
+                              <input class="datetime" size="16" type="text" value="@(DateTime.Now.ToString("dd-MM-yyyy"))">
+                              <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-4" for="empdepartment">Department :</label>
+                          <div class="col-sm-8">          
+      
+                              <div class="dropdown">
+                              <button class="btn btn-default dropdown-toggle" type="button" id="empdepartment" data-toggle="dropdown"> @(departments.First(x => !x.IsFull()).DepartmentName)
+                              <span class="caret"></span></button>
+                              <ul name="empdepartment-dropdown" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+                                  @foreach (var dep in departments)
+                                  {
+                                      var selected = departments.First(x => !x.IsFull()).DepartmentId == dep.DepartmentId;
+
+                                    <li data-dId="@dep.DepartmentId" role="presentation"
+                                        class="@(dep.IsFull() ? "disabled" : "") department-item @(selected ? "selected" : "")">
+                                            <a role="menuitem" href="#">@dep.DepartmentName</a>
+                                    </li>
+                                  }
+                              </ul>
+                            </div>
+
+                            <span id="empdepartment-error" class="error-message hidden">The department you have chosen is not valid. Please try again</span>
+
+                          </div>
+                        </div>
+                    
+                        <div id="success-message" class="alert alert-success success-message hidden">
+                            <span></span>
+                        </div>
+
+                        <div id="generic-error" class="error-message alert alert-danger hidden">
+                            <span>Something went wrong please try again.</span>
+                        </div>
+
+                    </form>
+                }
+                else if (!hasAvailableDepartments && hasDepartments)
+                {
+                    <span id="no-departments-error" class="error-message">@ViewBag.NoDepartmentsAvailableMessage</span>
+                }
+                else
+                {
+                    <span id="no-departments-error" class="error-message">@ViewBag.NoDepartmentsMessage</span>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@(hasDepartments ? "Cancel" : "Ok")</button>
+                @if (hasDepartments)
+                {
+                    <a class="btn btn-success btn-ok-create-emp">Create</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

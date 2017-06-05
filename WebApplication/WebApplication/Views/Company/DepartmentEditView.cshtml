@@ -1,0 +1,70 @@
+﻿@using WebApplication.Models
+
+@{
+    var department = ViewData["Department"] as Department;
+}
+
+<div class="fancybox-my-close icon icon-close" title="close"></div>
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+
+<div class="container editpage-content">
+  <h3>@department.DepartmentName</h3>
+  <form class="department-edit-form form-horizontal" data-dId="@department.DepartmentId" action="#">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Department Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" placeholder="Enter department name" value="@department.DepartmentName" name="name">
+        <span id="name-error" class="error-message hidden">The name was not filled correctly. Please enter a valid name for your department.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="mxemployees">Max Number Of Employees:</label>
+      <div class="col-sm-10">          
+      
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"> @(department.MaxEmployees > 0 ? department.MaxEmployees : 1)
+          <span class="caret"></span></button>
+          <ul name="num-dropdown" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+              @for (int i = 1; i < 100; i++)
+              {
+                  var selected = department.MaxEmployees > 0 && department.MaxEmployees == i;
+
+                <li class="number @(selected ? "selected" : "")" role="presentation"><a role="menuitem" href="#">@i</a></li>
+              }
+          </ul>
+        </div>
+
+        <span id="maxnumber-error" class="error-message hidden">The max number was not filled correctly. Please enter a valid number for your department.</span>
+
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Employees Assigned:</label>
+      <div class="col-sm-10">
+        <input type="number" readonly="readonly" class="form-control" id="empcount" value="@department.Employees.Count" name="empcount">
+      </div>
+    </div>
+
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="button" class="submit-dep-edit btn btn-default" value="Edit" />
+          
+      </div>
+    </div>
+
+    <div id="success-message" class="alert alert-success success-message hidden">
+        <span></span>
+    </div>
+
+    <div id="generic-error" class="error-message alert alert-danger hidden">
+        <span>Something went wrong please try again.</span>
+    </div>
+
+  </form>
+</div>
+
+

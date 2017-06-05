@@ -1,0 +1,96 @@
+﻿@using WebApplication.Models
+
+@{
+    var departments = ViewData["Departments"] as List<Department>;
+}
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+    <p class="lead">@ViewBag.Message</p>
+</div>
+
+<div class="content col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
+
+@if (departments.Any())
+{
+    <div>
+        <h3>Departments : </h3>
+        
+        
+        <div style="padding-left: 0px; height: 100%;" class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0">
+        
+            <table class="table table-bordered">
+                <tr>
+                    <th>Department Name</th>
+                    <th>Max Employees</th>
+                    <th>Emnployees</th>
+                </tr>
+                
+                  @foreach (var dep in departments)
+                  {
+                    <tr>
+                        <td>@dep.DepartmentName</td>
+                        <td>@dep.MaxEmployees</td>
+                        <td>
+                            @if (dep.Employees.Any())
+                            {
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Birth Date</th>
+                                    </tr>
+                                
+                                    @foreach (var emp in dep.Employees)
+                                    {
+                                        <tr>
+                                            <td>@emp.FirstName</td>
+                                            <td>@emp.LastName</td>
+                                            <td>@emp.Email</td>
+                                            <td>@emp.BirthdayDate.ToString("dd/MM/yyyy")</td>
+                                        </tr>
+                                    }
+                                
+                                </table>
+                            }
+                            else
+                            {
+                                <span>Does not have employees yet.</span>
+                            }
+                        </td>
+                    </tr>
+                  }
+
+            </table>
+
+        </div>
+
+        @*<ul class="list-group">
+        @foreach (var dep in departments)
+        {
+            <li class="list-group-item">
+                <span>@(dep.DepartmentName + " - " + dep.MaxEmployees)</span>
+                @if (dep.Employees.Any())
+                {
+                    <ul class="glyphicon-list">
+                    @foreach (var emp in dep.Employees)
+                    {
+                        <li>
+                            <span>@emp.FirstName</span>
+                            <span>@emp.LastName</span>
+                            <span>@emp.Email</span>
+                            <span>@(emp.BirthdayDate.ToString("dd / MM / yyyy"))</span>
+                        </li>
+                    }
+                    </ul>
+                }
+            </li>
+        }
+        </ul>*@
+
+
+    </div>
+}
+
+</div>

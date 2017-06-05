@@ -1,0 +1,141 @@
+﻿@using WebApplication.Models
+
+@{
+    var departments = ViewData["Departments"] as List<Department>;
+}
+
+<div class="content departments-content col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
+
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+
+<span class="panel-title">Departments : </span>
+    
+    @if (departments.Any())
+    {
+        <div style="padding: 25px 0px 50% 0px; height: 200px;" class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0">
+        
+            <table class="table table-hover table-content dpttable">
+                <tr>
+                    <th>ID</th>
+                    <th>Department</th>
+                    <th>Max employees</th>
+                    <th></th>
+                </tr>
+            
+                @foreach (var dep in departments)
+                {
+                    <tr class="table-row" data-id="@dep.DepartmentId" data-url="@Url.Action("DepartmentEditView", "Company", new { id = dep.DepartmentId })">
+                        <td>@dep.DepartmentId</td>
+                        <td>@dep.DepartmentName</td>
+                        <td>@dep.MaxEmployees</td>
+                        <td class="delete-button-container"> 
+                            <div class="button-wrapper">
+                                <input class="x-remove" type="button" value="X" hidden="hidden" /> 
+                                <button id="mybutton" class="button-class" data-toggle="modal" data-target="#confirm-delete">X</button> 
+                            </div>
+                            <div class="error-wrapper">
+                                <span class="error-message danger" hidden="hidden"></span>
+                            </div>
+                        </td>
+                    </tr>
+                
+                }
+                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+
+            <button id="create-button" data-toggle="modal" data-target="#create-dep-modal">Create New Department</button>
+
+        </div>
+    }
+    else
+    {
+        <div style="padding: 100px 0px 50% 0px; height: 200px;" class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0">
+            <div>
+                <span class="panel-title">@ViewBag.NoResultsMessage</span>
+            </div>
+            <div>
+                <button id="create-button" data-toggle="modal" data-target="#create-dep-modal">Create New Department</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+@*The confiramtion modal*@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-edit">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*The create modal*@
+<div class="modal fade" id="create-dep-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-create">
+            <div class="modal-header">
+                Create a new department
+            </div>
+            <div class="modal-body">
+                
+                <form class="department-edit-form form-horizontal" action="#">
+                    <div class="form-group">
+                      <label class="control-label col-sm-4" for="name">Department Name:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" id="name" placeholder="Enter department name" name="name">
+                        <span id="name-error" class="error-message hidden">The name was not filled correctly. Please enter a valid name for your department.</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-5" for="mxemployees">Max Number Of Employees:</label>
+                      <div class="col-sm-7">          
+      
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">1
+                                <span class="caret"></span>
+                            </button>
+                            <ul name="num-dropdown" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+                                @for (int i = 1; i < 100; i++)
+                                {
+                                    <li class="number @(i == 1 ? "selected" : "" )" role="presentation"><a role="menuitem" href="#">@i</a></li>
+                                }
+                            </ul>
+                        </div>
+
+                        <span id="maxnumber-error" class="error-message hidden">The name was not filled correctly. Please enter a valid name for your department.</span>
+
+                      </div>
+                    </div>
+
+                    <div id="success-message" class="alert alert-success success-message hidden">
+                        <span></span>
+                    </div>
+
+                    <div id="generic-error" class="error-message alert alert-danger hidden">
+                        <span>Something went wrong please try again.</span>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-success btn-ok-create-dep">Create</a>
+            </div>
+        </div>
+    </div>
+</div>

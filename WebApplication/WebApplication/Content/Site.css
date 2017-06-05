@@ -1,0 +1,74 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.delete-button-container > .button-wrapper { float: right;
+}
+
+.error-wrapper {float: right;
+}
+
+.error-message {
+    color: red;
+}
+
+.error-message.danger {
+    font-size: 11px;
+}
+
+.dpttable .table-row td:nth-child(1) { width: 5% }
+.dpttable .table-row td:nth-child(2) { width: 25% }
+.dpttable .table-row td:nth-child(3) { width: 25% }
+.dpttable .table-row td:nth-child(4) { width: 45% }
+
+.emptable .table-row td:nth-child(1) { width: 5% }
+.emptable .table-row td:nth-child(2) { width: 10% }
+.emptable .table-row td:nth-child(3) { width: 10% }
+.emptable .table-row td:nth-child(4) { width: 10% }
+.emptable .table-row td:nth-child(5) { width: 15% }
+.emptable .table-row td:nth-child(6) { width: 50% }
+
+
+.icon-close {
+    float: right;
+    margin: -10px 10px 50px 20px;
+}
+
+.icon-close:before {
+    content: url('/Images/Icons/icon-close-small.png');
+}
+
+input#empcount {
+    width: 50px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+
+.modal-edit { width: 30% }
