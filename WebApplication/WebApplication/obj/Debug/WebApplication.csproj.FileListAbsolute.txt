@@ -80,6 +80,7 @@ C:\Users\Periklis\Desktop\SoftComApp\WebApplication\WebApplication\obj\Debug\Web
 C:\Users\Periklis\Desktop\SoftComApp\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Periklis\Desktop\SoftComApp\WebApplication\WebApplication\bin\FluentValidation.dll
 C:\Users\Periklis\Desktop\SoftComApp\WebApplication\WebApplication\bin\FluentValidation.xml
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\ApplicationInsights.config
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\roslyn\csc.exe
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\roslyn\csc.exe.config
@@ -125,16 +126,19 @@ C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.ServiceLocation.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.Configuration.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.dll
-C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Newtonsoft.Json.dll
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Net.Http.Formatting.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Helpers.dll
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Http.dll
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Http.WebHost.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Mvc.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Optimization.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Razor.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.WebPages.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Unity.Mvc3.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\WebGrease.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\EntityFramework.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\EntityFramework.SqlServer.xml
@@ -144,8 +148,10 @@ C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.ServiceLocation.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.Configuration.xml
-C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Newtonsoft.Json.xml
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Net.Http.Formatting.xml
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Http.xml
+C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Http.WebHost.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Helpers.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Mvc.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\System.Web.Optimization.xml
@@ -159,6 +165,5 @@ C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\bin\Microsoft.AI.Web.xml
-C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\Periklis\Desktop\GitRepos\WebApplication\WebApplication\WebApplication\obj\Debug\WebApplication.pdb

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebApplication.Controllers;
 using WebApplication.IoC;
 
 namespace WebApplication
@@ -18,9 +19,11 @@ namespace WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //in app start ioc registry will register all classes need to be instatiated 
-            //in UnityContainerManager for later usage 
-            IocRegistry.RegisterAll();
+            //Initialize IoC container/Unity
+            Bootstrapper.Initialise();
+
+            //Register our custom controller factory
+            ControllerBuilder.Current.SetControllerFactory(typeof(CompanyControllerFactory));
         }
     }
 }

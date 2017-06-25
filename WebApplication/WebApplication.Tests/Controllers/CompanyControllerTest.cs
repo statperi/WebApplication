@@ -6,6 +6,7 @@ using WebApplication.Controllers;
 using WebApplication.Helpers;
 using Newtonsoft.Json;
 using WebApplication.IoC;
+using WebApplication.Models;
 
 namespace WebApplication.Tests.Controllers
 {
@@ -16,6 +17,7 @@ namespace WebApplication.Tests.Controllers
         public void EmployeeEdit()
         {
             var companyManager = new CompanyManager();
+            var factory = new Factory();
 
             var empl = companyManager.GetAllEmployees(false).First();
             var dep = companyManager.GetAllDepartments(true).First(x => !x.IsFull());
@@ -23,7 +25,7 @@ namespace WebApplication.Tests.Controllers
             if (dep == null || empl == null) return;
 
             // Arrange
-            CompanyController controller = new CompanyController();
+            CompanyController controller = new CompanyController(companyManager, factory);
 
             // Act
             //add new values to the first employee availabe to the first department available

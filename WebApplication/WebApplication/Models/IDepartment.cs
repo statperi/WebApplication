@@ -8,6 +8,8 @@ namespace WebApplication.Models
 {
     public interface IDepartment
     {
+        IList<Employee> Employees { get; set; }
+
         /// <summary>
         /// Creates the department and stores it in db
         /// </summary>

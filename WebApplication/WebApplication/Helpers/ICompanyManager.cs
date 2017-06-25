@@ -14,7 +14,7 @@ namespace WebApplication.Helpers
 
         void UpdateDepartment(Department department);
 
-        List<Department> GetAllDepartments(bool includeEmployees);
+        List<Department> GetAllDepartments(bool includeEmployees = false);
 
         void CreateEmployee(Employee employee);
 
@@ -23,6 +23,6 @@ namespace WebApplication.Helpers
         void UpdateEmployee(Employee employee);
 
 
-        List<Employee> GetAllEmployees(bool includeDepartment);
+        List<Employee> GetAllEmployees(bool includeDepartment = false);
     }
 }

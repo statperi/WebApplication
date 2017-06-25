@@ -14,12 +14,20 @@ namespace WebApplication.Controllers
 {
     public class CompanyController : Controller
     {
-        private CompanyManager CompanyManager = UnityContainerManager.IoC.Resolve<CompanyManager>();
+        public readonly ICompanyManager CompanyManager = null;
+        public readonly IFactory Factory = null;
+
+        public CompanyController(ICompanyManager _companyManager, IFactory _factory)
+        {
+            this.CompanyManager = _companyManager;
+            this.Factory = _factory;
+        }
 
         public ActionResult Details()
         {
-            ViewData["Departments"] = this.CompanyManager.GetAllDepartments(true);
+            ViewData["Departments"] = CompanyManager.GetAllDepartments(true);
 
+            ViewBag.Template = PageTemplates.Codes.Details;
             ViewBag.Title = "THE COMPANY";
             ViewBag.Message = "This is an application to handle your company departments and employees!";
             
@@ -28,8 +36,9 @@ namespace WebApplication.Controllers
 
         public ActionResult Departments()
         {
-            ViewData["Departments"] = this.CompanyManager.GetAllDepartments();
+            ViewData["Departments"] = CompanyManager.GetAllDepartments();
 
+            ViewBag.Template = PageTemplates.Codes.Departments;
             ViewBag.Title = "COMPANY DEPARTMENTS";
             ViewBag.Message = "Here you can handle the company's Departments.";
             ViewBag.NoResultsMessage = "No Departments Found";
@@ -42,6 +51,7 @@ namespace WebApplication.Controllers
             ViewData["Employees"] = this.CompanyManager.GetAllEmployees(true);
             ViewData["Departments"] = this.CompanyManager.GetAllDepartments(true);
 
+            ViewBag.Template = PageTemplates.Codes.Employees;
             ViewBag.Title = "COMPANY EMPLOYEES";
             ViewBag.Message = "Here you can handle the company's Employees.";
             ViewBag.NoResultsMessage = "No Employees Found";
@@ -55,8 +65,9 @@ namespace WebApplication.Controllers
 
         public ActionResult DepartmentEditView(int id)
         {
-            ViewData["Department"] = this.CompanyManager.GetDepartment(id);
+            ViewData["Department"] = ((CompanyManager)this.CompanyManager).GetDepartment(id);
 
+            ViewBag.Template = PageTemplates.Codes.DepartmentEdit;
             ViewBag.Title = "Edit Department";
             ViewBag.Message = "Here you can edit the department's details.";
 
@@ -68,9 +79,10 @@ namespace WebApplication.Controllers
         
         public ActionResult EmployeeEditView(int id)
         {
-            ViewData["Employee"] = this.CompanyManager.GetEmployee(id);
+            ViewData["Employee"] = ((CompanyManager)this.CompanyManager).GetEmployee(id);
             ViewData["Departments"] = this.CompanyManager.GetAllDepartments(true);
 
+            ViewBag.Template = PageTemplates.Codes.EmployeeEdit;
             ViewBag.Title = "Edit Employee";
             ViewBag.Message = "Here you can edit the employee's details.";
 
@@ -94,8 +106,9 @@ namespace WebApplication.Controllers
                 {
                     return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.ValidationError, Message = "Validation Error" });
                 }
-
-                var employeeToCreate = UnityContainerManager.IoC.Resolve<Employee>();
+                
+                //var employeeToCreate = (Employee)Factory.GetObject<Employee>();
+                var employeeToCreate = (Employee)Factory.CreateEmployee();
                 employeeToCreate.FirstName = firstName;
                 employeeToCreate.LastName = lastName;
                 employeeToCreate.Email = email;
@@ -125,10 +138,10 @@ namespace WebApplication.Controllers
                     return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.ValidationError, Message = "Validation Error" });
                 }
 
-                var employeeToEdit = CompanyManager.GetEmployee(id);
+                var employeeToEdit = ((CompanyManager)this.CompanyManager).GetEmployee(id);
                 if (employeeToEdit != null)
                 {
-                    var newDepartment = CompanyManager.GetDepartment(depId);
+                    var newDepartment = ((CompanyManager)this.CompanyManager).GetDepartment(depId);
                     if (newDepartment.IsFull() && employeeToEdit.DepartmentId != newDepartment.DepartmentId)
                     {
                         return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.GenericError, Message = "Department is full please pick another one." });
@@ -158,7 +171,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                var employeeToDelete = CompanyManager.GetEmployee(id);
+                var employeeToDelete = ((CompanyManager)this.CompanyManager).GetEmployee(id);
                 if (employeeToDelete != null)
                 {
                     CompanyManager.DeleteEmployee(employeeToDelete);
@@ -189,12 +202,14 @@ namespace WebApplication.Controllers
 
                 if (!string.IsNullOrEmpty(departmentName) && maxNumberOfEmployees > 0)
                 {
-                    var departmentToCreate = UnityContainerManager.IoC.Resolve<Department>();
+                    //var departmentToCreate = (Department)Factory.GetObject<Department>();
+                    var departmentToCreate = (Department)Factory.CreateDepartment();
+
                     departmentToCreate.DepartmentName = departmentName;
                     departmentToCreate.MaxEmployees = maxNumberOfEmployees;
                     departmentToCreate.Employees = new List<Employee>();
 
-                    CompanyManager.CreateDepartment(departmentToCreate);
+                    CompanyManager.CreateDepartment((Department)departmentToCreate);
                     return Json(new { Response = Services.ResponceTypes.ServiceResponce.ResponseTypes.OperationSuccesful, Message = "Department Created Succesfully" });
                 }
 
@@ -210,7 +225,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                var departmentToEdit = CompanyManager.GetDepartment(id);
+                var departmentToEdit = ((CompanyManager)this.CompanyManager).GetDepartment(id);
 
                 //extra validation for employees so the appropriate message shall return
                 if (maxNumberOfEmployees < departmentToEdit.Employees.Count)
@@ -250,7 +265,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                var departmentToDelete = CompanyManager.GetDepartment(id);
+                var departmentToDelete = ((CompanyManager)this.CompanyManager).GetDepartment(id);
                 if (departmentToDelete != null)
                 {
                     if (departmentToDelete.Employees.Any())

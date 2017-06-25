@@ -10,12 +10,13 @@ namespace WebApplication.IoC
 {
     public class IocRegistry
     {
-        public static void RegisterAll()
+        public static void RegisterAll(IUnityContainer container)
         {
             //register..
-            UnityContainerManager.IoC.RegisterType<ICompanyManager, CompanyManager>(new ContainerControlledLifetimeManager());
-            UnityContainerManager.IoC.RegisterType<IDepartment, Department>();
-            UnityContainerManager.IoC.RegisterType<IEmployee, Employee>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ICompanyManager, CompanyManager>();
+            container.RegisterType<IFactory, Factory>();
+            container.RegisterType<IDepartment, Department>();
+            container.RegisterType<IEmployee, Employee>();
         }
     }
 }

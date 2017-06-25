@@ -147,7 +147,6 @@ function CreateEmployee($this) {
 function InitEmployeeFancyBox($rows) {
     
     $rows.on('dblclick', this, function (e) {
-        console.log(this);
 
         $this = $(this);
 
@@ -162,8 +161,8 @@ function InitEmployeeFancyBox($rows) {
             closeClick: true,
             openEffect: 'none',
             closeEffect: 'none',
-            //width: 600,
-            //height: 600,
+            width: 600,
+            height: 600,
             padding: 0,
             beforeShow: function () {
                 var fancy = $('.fancybox-iframe');
@@ -171,6 +170,7 @@ function InitEmployeeFancyBox($rows) {
 
                 this.width = ($('.fancybox-iframe').contents().find('.framing-what').width());
                 this.height = ($('.fancybox-iframe').contents().find('html').height());
+                
             },
             afterShow: function () {
                 var fancyInner = $('.fancybox-inner');

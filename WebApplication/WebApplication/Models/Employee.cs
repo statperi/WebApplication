@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using WebApplication.Helpers;
 
 namespace WebApplication.Models
 {
     public class Employee : IEmployee
     {
+        internal Employee() { }
+
         #region fields
         
         public ICompanyContext companyContext { get; set; }

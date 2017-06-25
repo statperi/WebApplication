@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication.Helpers;
 
 namespace WebApplication.Models
 {
     public class Department : IDepartment
     {
+        internal Department() { }
 
         #region fields
 

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication.Helpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,7 +9,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/myscripts")
+        
+    @Scripts.Render("~/bundles/Pages")
+    @Scripts.Render("~/bundles/EditPages")
+
+    
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top @(ViewBag.HideHeader != null && ViewBag.HideHeader ? "hidden" : "")">
